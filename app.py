@@ -7,8 +7,8 @@ st.set_page_config(page_title="Bốc Lì Xì May Mắn", page_icon="🧧", layou
 # Hàm khởi tạo lại trò chơi
 def reset_game():
     # Tạo danh sách 20 bao theo số lượng mới
-    # 9 bao 10k, 7 bao 20k, 2 bao 30k, 2 bao 50k
-    values = [10000] * 9 + [20000] * 7 + [30000] * 2 + [50000] * 2
+    # 7 bao 10k, 7 bao 20k, 3 bao 30k, 3 bao 50k
+    values = [10000] * 7 + [20000] * 7 + [30000] * 3 + [50000] * 3
     random.shuffle(values) # Xáo trộn ngẫu nhiên
     
     st.session_state.envelopes = values
@@ -29,6 +29,10 @@ def open_envelope(index):
         st.session_state.turns_left -= 1
         st.session_state.total_won += value
         st.session_state.history.append(value)
+        
+        # Thêm chút hiệu ứng nếu bốc trúng bao 50k
+        if value == 50000:
+            st.balloons()
 
 # --- GIAO DIỆN CHÍNH ---
 st.title("🧧 Hái Lộc Đầu Xuân - Bốc Bao Lì Xì 🧧")
